@@ -1,8 +1,26 @@
 import requests
 
-result = requests.get('<Hello World! Lambda>')
-print(result)
-print(result.text)
+URL = '<Hello World! Lambda>'
 
-# test output
-assert result.text == 'Hello World!'
+
+def hello_world():
+    result = requests.get(URL)
+    print(result)
+    print(result.text)
+
+    # test output
+    assert result.text == 'Hello World!'
+
+
+def hello_name(name):
+    link = f'{URL}?name={name}'
+    result = requests.get(link)
+
+    print(result)
+    print(result.text)
+
+    # test output
+    assert result.text == f'Hello, {name}!'
+
+
+hello_name('John')
