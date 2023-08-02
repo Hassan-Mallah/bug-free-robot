@@ -12,15 +12,22 @@ def hello_world():
     assert result.text == 'Hello World!'
 
 
-def hello_name(name):
+def hello_name(name, method):
+    """ accepts GET or POST and send request to amazon function """
+
     link = f'{URL}?name={name}'
-    result = requests.get(link)
+
+    # from aws lambda, you can check method with httpMethod
+    if method == 'GET':
+        result = requests.get(link)
+    elif method == 'POST':
+        result = requests.get(link)
 
     print(result)
     print(result.text)
 
     # test output
-    assert result.text == f'Hello, {name}!'
+    assert result.json() == {'httpMethod': f'{method}', 'text': f'Hello, {name}!'}
 
 
-hello_name('John')
+hello_name('John', 'GET')
